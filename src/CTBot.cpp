@@ -250,7 +250,9 @@ CTBotMessageType CTBot::getNewMessage(TBMessage& message, bool blocking) {
 		message.callbackQueryData = root[FSTR("result")][0][FSTR("callback_query")][FSTR("data")].as<String>();
 		message.chatInstance      = root[FSTR("result")][0][FSTR("callback_query")][FSTR("chat_instance")].as<String>();
 		message.messageType       = CTBotMessageQuery;
-
+		message.group.id          = root[FSTR("result")][0][FSTR("callback_query")][FSTR("message")][FSTR("chat")][FSTR("id")].as<int64_t>();
+		message.group.title       = root[FSTR("result")][0][FSTR("callback_query")][FSTR("message")][FSTR("chat")][FSTR("title")].as<String>();
+		
 		serialLog(FSTR("--->getNewMessage: Free heap memory : "), CTBOT_DEBUG_MEMORY);
 		serialLog(ESP.getFreeHeap(), CTBOT_DEBUG_MEMORY);
 		serialLog("\n", CTBOT_DEBUG_MEMORY);
